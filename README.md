@@ -1,3 +1,3 @@
 # Bachelor Prototypes
 
-This repository contains 
+This repository contains projects for my bachelor thesis
