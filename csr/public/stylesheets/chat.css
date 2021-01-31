@@ -1,0 +1,46 @@
+#chat-input-group {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 7px;
+    padding-bottom: 3px;
+}
+
+#chat-input-group .row, #chat-input-group .row div {
+    margin-bottom: 0;
+}
+
+#chat-input-group .row {
+    margin-right: 20px;
+}
+
+#chat-input-group .row.mobile {
+    margin-right: 0px !important;
+}
+
+#send-button {
+    margin-top: 2px;
+}
+
+.chat-msg-username {
+    font-weight: bold;
+}
+
+.chat-msg-date {
+    font-size: smaller;
+}
+
+.chat-msg-text {
+    font-size: small;
+}
+
+.sys-msg-text {
+    font-size: normal;
+    font-weight: bold;
+}
+
+.bold {
+    font-weight: bold;
+}
