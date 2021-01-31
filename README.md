@@ -22,6 +22,6 @@ The projects contains new javascript syntax so please use a NodeJS Version of 14
 1. Move into the directory `ssr`.
 1. Execute `npm i`.
 1. Create a file `.env`.
-1. Put the string `TOKEN_SECRET=` into the `.env` file.
+1. Put the string `AUTH_TOKEN_SECRET=` into the `.env` file.
 1. Call the NodeJS console by typing `node`, generate a secret token using `require('crypto').randomBytes(64).toString('hex')` and copy the value with both `'` into the `.env` file.+
 1. Use `npm start` to start the NodeJS instance.
