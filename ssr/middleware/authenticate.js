@@ -2,23 +2,27 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 
-function generateAccessToken() {
-  //crypto.randomBytes(64).toString('hex')// expires after half and hour (1800 seconds = 30 minutes)
-  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+
+function generateAccessToken({ username }) {
+  // Expires after half and hour (1800 seconds = 30 minutes)
+  return jwt.sign(username, process.env.AUTH_TOKEN_SECRET);
 }
 
-function authenticateToken(req, res, next) {
+async function authenticateToken(req, res, next) {
   // Gather the jwt access token from the request header
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (token == null) return res.redirect('/login'); // if there isn't any token
+  const token = req.cookies?.authcookie;
+  // Check if there is no token
+  console.log(token);
+  if (!token) return res.redirect('/login');
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    console.log(err);
-    if (err) return res.sendStatus(403);
-    req.user = user;
+  try {
+    const username = await jwt.verify(token, process.env.AUTH_TOKEN_SECRET);
+    req.username = username;
     next(); // pass the execution off to whatever request the client intended
-  })
+  } catch (err) {
+    console.log(err);
+    return res.redirect('/login');
+  }
 }
 
 module.exports = { generateAccessToken, authenticateToken };
