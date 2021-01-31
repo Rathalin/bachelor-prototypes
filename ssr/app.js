@@ -6,6 +6,13 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
+const registerRouter = require('./routes/register');
+
+// Authentication
+const { authenticateToken } = require('./middleware/authenticate');
+
 
 var app = express();
 
@@ -18,8 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+;
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
+app.use('/', authenticateToken, indexRouter)
+app.use('/logout', authenticateToken, logoutRouter);
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

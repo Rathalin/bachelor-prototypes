@@ -6,12 +6,11 @@ router.get('/', function (req, res, next) {
 
   // user info
   let user = {
-    name: {
-      title: '',
-      first: 'Daniel',
-      last: 'Flockert',
-    },
-    birthday: '23.05.1997',
+    username: 'Rathalin',
+    firstname: 'Daniel',
+    lastname: 'Flockert',
+    gender: 'male',
+    dateOfBirth: '23.05.1997',
 
   };
 
