@@ -18,7 +18,7 @@ router.post('/', async function (req, res) {
   }
   // Check credentials
   const { username, password } = req.body;
-  const user = await userM.findOne({ username, password });
+  const user = await userM.findOne({ username, password }).exec();
   if (!user) {
     return res.render('login',
       { title: 'Login failed', errors: [{ error: { text: 'The login details you entered are incorrect. Please try again.' }, },] }
@@ -27,7 +27,6 @@ router.post('/', async function (req, res) {
 
   // Generate token
   const token = generateAccessToken(user);
-
   res.cookie('authcookie', token, { expires: new Date(Date.now() + 1 * 3600000), httpOnly: true });
   res.redirect('/');
 });

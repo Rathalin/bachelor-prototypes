@@ -1,20 +1,13 @@
 var express = require('express');
 var router = express.Router();
+const userM = require('../models/userModel');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
 
-  // user info
-  let user = {
-    username: 'Rathalin',
-    firstname: 'Daniel',
-    lastname: 'Flockert',
-    gender: 'male',
-    dateOfBirth: '23.05.1997',
+router.get('/', async function (req, res, next) {
 
-  };
+  const user = await userM.findById(req.userId).exec();
 
-  res.render('index', { title: 'Express', user });
+  res.render('index', { title: user.username, user });
 });
 
 module.exports = router;

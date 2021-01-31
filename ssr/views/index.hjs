@@ -35,35 +35,22 @@
               </div>
               <div id="person-content" class="card-content">
                 <div id="person-name" class="card-title">
-                  <span v-if="person.title">{{ person.title }} </span>
-                  <span>{{ person.firstname }} </span>
-                  <span>{{ person.lastname }} </span>
+                  <span v-if="person.title">{{ user.title }} </span>
+                  <span>{{ user.firstname }} </span>
+                  <span>{{ user.lastname }} </span>
                 </div>
+                {{# user.gender }}
                 <p>
                   <span>Gender: </span>
-                  <span>{{ person.gender | capitalize }}</span>
+                  <span>{{ user.gender }}</span>
                 </p>
+                {{/ user.gender }}
+                {{# user.email }}
                 <p>
                   <span>Email: </span>
-                  <span>{{ person.email }}</span>
+                  <span>{{ user.email }}</span>
                 </p>
-                <p>
-                  <span>Phone: </span>
-                  <span>{{ person.phone }}</span>
-                </p>
-                <p>
-                  <span>Street: </span>
-                  <span>{{ person.streetnumber }} </span>
-                  <span>{{ person.streetname }}</span>
-                </p>
-                <p>
-                  <span>City: </span>
-                  <span>{{ person.city }}</span>
-                </p>
-                <p>
-                  <span>State: </span>
-                  <span>{{ person.state }}</span>
-                </p>
+                {{/ user.email }}
               </div>
             </div>
           </div>

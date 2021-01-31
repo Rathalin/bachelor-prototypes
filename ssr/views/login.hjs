@@ -44,6 +44,16 @@
           </div>
         </form>
       </div>
+      <div class="row">
+        <div class="col">
+          <p>No account yet?</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a href="/register" class="btn">Register</a>
+        </div>
+      </div>
     </div>
   </main>
 </body>
