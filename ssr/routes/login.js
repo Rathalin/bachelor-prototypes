@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { generateAccessToken } = require('../middleware/authenticate');
+const { generateAccessToken, hash } = require('../middleware/authenticate');
 const userM = require('../models/userModel');
 
 
@@ -18,7 +18,7 @@ router.post('/', async function (req, res) {
   }
   // Check credentials
   const { username, password } = req.body;
-  const user = await userM.findOne({ username, password }).exec();
+  const user = await userM.findOne({ username, password: hash(password) }).exec();
   if (!user) {
     return res.render('login',
       { title: 'Login failed', errors: [{ error: { text: 'The login details you entered are incorrect. Please try again.' }, },] }

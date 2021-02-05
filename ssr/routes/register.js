@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { generateAccessToken } = require('../middleware/authenticate');
+const { generateAccessToken, hash } = require('../middleware/authenticate');
 const userM = require('../models/userModel');
 
 
@@ -24,7 +24,8 @@ router.post('/', async function (req, res) {
     );
   }
   // Insert new user into db
-  const user = await userM.create({ username, password });
+  const hashedPassword = hash(password);
+  const user = await userM.create({ username, password: hashedPassword });
   // Generate token
   const token = generateAccessToken(user);
   res.cookie('authcookie', token, { expires: new Date(Date.now() + 1 * 3600000), httpOnly: true });

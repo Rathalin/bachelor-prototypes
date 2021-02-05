@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const crypto = require('crypto');
 dotenv.config();
 
 
@@ -12,7 +13,6 @@ async function authenticateToken(req, res, next) {
   // Gather the jwt access token from the request header
   const token = req.cookies?.authcookie;
   // Check if there is no token
-  console.log(token);
   if (!token) return res.redirect('/login');
 
   try {
@@ -25,4 +25,14 @@ async function authenticateToken(req, res, next) {
   }
 }
 
-module.exports = { generateAccessToken, authenticateToken };
+
+function hash(str) {
+  const hash = crypto.createHash('sha256');
+  hash.update(str);
+  const hashStr = hash.digest('hex');
+  hash.end();
+  return hashStr;
+}
+
+
+module.exports = { generateAccessToken, authenticateToken, hash };
