@@ -13,7 +13,7 @@ async function authenticateToken(req, res, next) {
   // Gather the jwt access token from the request header
   const token = req.cookies?.authcookie;
   // Check if there is no token
-  if (!token) return res.redirect('/login');
+  if (!token) { return res.redirect('/login'); }
 
   try {
     const userId = await jwt.verify(token, process.env.AUTH_TOKEN_SECRET);

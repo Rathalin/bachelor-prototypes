@@ -16,9 +16,16 @@ router.post('/', async function (req, res) {
       { title: 'Login failed', errors: [{ error: { text: 'Please put in your username and password.' }, },] }
     );
   }
-  // Check credentials
   const { username, password } = req.body;
-  const user = await userM.findOne({ username, password: hash(password) }).exec();
+  // Check if username exists
+  let user = await userM.findOne({ username }).exec();
+  if (!user) {
+    return res.render('login',
+      { title: 'Login failed', errors: [{ error: { text: `There is no user registered as ${username}.` }, },] }
+    );
+  }
+  // Check credentials
+  user = await userM.findOne({ username, password: hash(password) }).exec();
   if (!user) {
     return res.render('login',
       { title: 'Login failed', errors: [{ error: { text: 'The login details you entered are incorrect. Please try again.' }, },] }

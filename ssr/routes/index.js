@@ -4,10 +4,10 @@ const userM = require('../models/userModel');
 
 
 router.get('/', async function (req, res, next) {
-
+  // Load user
   const user = await userM.findById(req.userId).exec();
-
   res.render('index', { title: user.username, user });
 });
+
 
 module.exports = router;

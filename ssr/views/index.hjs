@@ -9,54 +9,41 @@
 </head>
 
 <body>
-  <header>
-    <div id="alerts" class="container">
-      {{# alert }}
-      <h5>{{ text }}</h5>
-      {{/ alert }}
-    </div>
-  </header>
-  <main>
+  <main class="container">
     <div class="row">
-      <div id="profile" class="col m8">
+      <div id="profile" class="col m12 l8">
+        <div id="alerts" class="row">
+          {{# alert }}
+          <h5>{{ text }}</h5>
+          {{/ alert }}
+        </div>
         <div class="row">
           <h1>
-            <span class="col s12 m8">{{ user.username }}</span>
-            <form class="col s12 m4 right" action="/logout" method="POST">
+            <span class="col s12 m6">{{ user.username }}</span>
+            <div class="col s12 m3">
+              <a href="/edit" class="btn">Edit Profile</a>
+            </div>
+            <form class="col s12 m3 right" action="/logout" method="POST">
               <button type="submit" class="btn">Logout</button>
             </form>
           </h1>
         </div>
         <div class="row">
-          <div class="col s12 m6">
-            <div class="card resizable">
+          <div class="col s12 m12">
+            <!--<div class="card">
               <div class="card-image">
-                <img id="person-img" :src="person.imgUrl">
-              </div>
-              <div id="person-content" class="card-content">
-                <div id="person-name" class="card-title">
-                  <span v-if="person.title">{{ user.title }} </span>
-                  <span>{{ user.firstname }} </span>
-                  <span>{{ user.lastname }} </span>
-                </div>
-                {{# user.gender }}
-                <p>
-                  <span>Gender: </span>
-                  <span>{{ user.gender }}</span>
-                </p>
-                {{/ user.gender }}
-                {{# user.email }}
-                <p>
-                  <span>Email: </span>
-                  <span>{{ user.email }}</span>
-                </p>
-                {{/ user.email }}
-              </div>
-            </div>
+                <img id="profile-img" :src="user.imgUrl">
+              </div>  
+            </div>            
+          </div>-->
+            <span>{{ user.firstname }}</span>
+            <span>{{ user.lastname }}</span>
           </div>
+          <div class="col s12">{{ user.gender }}</div>
+          <div class="col s12">{{ user.dateOfBirth }}</div>
         </div>
       </div>
-      <div id="chat" class="col m4">
+      <div id="chat" class="col m12 l4">
         <h1>Chat</h1>
       </div>
     </div>
