@@ -38,10 +38,11 @@ let clients = [];
 
 function recieveLogin(login) {
     this.credentials.username = login.username;
-    // emit login to other clients
+    // emit login to all other clients
     this.broadcast.emit(TYPE.LOGIN, {
         username: login.username,
     });
+    //this.emit(TYPE.LOGIN, { username: login.username });
     log.info(`[Login] Client joined as ${this.credentials.username}`);
 }
 
@@ -53,7 +54,7 @@ function recieveLogout(logout) {
 }
 
 function recieveChatMessage(chatMsg) {
-    // send textmessage to all clients
+    // send textmessage to all other clients
     this.broadcast.emit(TYPE.CHATMESSAGE, {
         username: this.credentials.username,
         text: chatMsg.text,
