@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const userM = require('../models/userModel');
 
 
 router.get('/', async function (req, res, next) {
   // Load user
-  const user = await userM.findById(req.userId).exec();
-  res.render('index', { title: user.username, user });
+  const { user, socket, chatmessages } = req;
+  res.render('index', { title: user.username, user, messages: chatmessages });
 });
 
 
 module.exports = router;
+

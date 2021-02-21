@@ -6,12 +6,16 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script src="/javascripts/materialize.min.js"></script>
   <script src="/javascripts/materialize_init.js"></script>
+  <script src="/javascripts/chat.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="http://localhost:9123/socket.io/socket.io.js"></script>
+
 </head>
 
 <body>
   <main class="container">
     <div class="row">
-      <div id="profile" class="col m12 l8">
+      <div id="profile" class="col">
         <div id="alerts" class="row">
           {{# alert }}
           <h5>{{ text }}</h5>
@@ -43,8 +47,29 @@
           <div class="col s12">{{ user.dateOfBirth }}</div>
         </div>
       </div>
-      <div id="chat" class="col m12 l4">
-        <h1>Chat</h1>
+    </div>
+    <div class="row">
+      <div id="chat-wrapper" class="col s12">
+        <h1>
+          <span>Chat</span>
+          <button id="refresh-chat" class="btn">Refresh</button>
+        </h1>
+        <div id="chat">
+          <ul id="chat-messages">
+            {{# messages }}
+            <li>{{ text }}</li>
+            {{/ messages }}
+          </ul>
+          <div id="chat-input-wrapper" class="row">
+            <form action="/chat/send" method="post">
+              <input data-emoji="true" type="text" name="chat-input" id="chat-input" class="col s10 m10 teal-text"
+                autocomplete="off" v-model="textmessage" maxlength="500" @keyup="chatinputKeyUp" autofocus>
+              <button id="send-button" value="Send" class="col s2 m1 btn white" type="submit">
+                <i class="material-icons teal-text">send</i>
+            </form>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </main>

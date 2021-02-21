@@ -16,7 +16,10 @@ router.post('/', async function (req, res) {
       { title: 'Registration failed', errors: [{ error: { text: 'Please put in username and password.' }, },] }
     );
   }
-  const { username, password } = req.body;
+
+  const username = req.body.username.trim();
+  const password = req.body.password;
+
   // Check if username already exists
   if ((await userM.countDocuments({ username }).exec()) > 0) {
     return res.render('register',

@@ -36,18 +36,18 @@
           </div>
         </div>
         <div class="row">
-          <div class="col s12 m4">
+          <div class="col s12 m4 l3">
             <a href="/" class="btn">Back</a>
             <button type="submit" class="btn">Save</button>
           </div>
           {{# alert }}
-          <div id="alert-msg" class="col s12 m4">
-            <h5 class="red-text">{{ alert.text }}</h5>
+          <div id="alert-msg" class="col s12 m4 l3">
+            <p class="red-text big-text">{{ alert.text }}</p>
           </div>
           {{/ alert }}
           {{# success }}
-          <div id="success-msg" class="col s12 m4">
-            <h5 class="green-text">{{ success.text }}</h5>
+          <div id="success-msg" class="col s12 m4 l3">
+            <div class="teal-text big-text">{{ success.text }}</div>
           </div>
           {{/ success }}
         </div>

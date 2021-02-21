@@ -14,9 +14,10 @@ main {
 }
 
 #profile {
-    height: 100vh;
 }
 
-#chat {
-    height: 100vh;
+.big-text {
+    padding-top: 5px;
+    font-size: large;
+    font-family: "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }

@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const crypto = require('crypto');
 dotenv.config();
 
+const userM = require('../models/userModel');
+
 
 function generateAccessToken({ _id }) {
   // Expires after half and hour (1800 seconds = 30 minutes)
@@ -17,8 +19,10 @@ async function authenticateToken(req, res, next) {
 
   try {
     const userId = await jwt.verify(token, process.env.AUTH_TOKEN_SECRET);
-    req.userId = userId;
-    next(); // pass the execution off to whatever request the client intended
+
+    // Attach user to req object
+    req.user = await userM.findById(userId).exec();
+    next();
   } catch (err) {
     console.log(err);
     return res.redirect('/login');
