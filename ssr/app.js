@@ -10,23 +10,19 @@ var usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
 const registerRouter = require('./routes/register');
+const chatRouter = require('./routes/chat');
+
+// Connection
+const Connection = require('./models/Connection');
 
 // Authentication
 const { authenticateToken } = require('./middleware/authenticate');
 
 // Chat
-const { connectToChat } = require('./middleware/chat');
+const { connectToChat } = require('./middleware/chatConnection');
 
-/*
-req = {
-  chat: {
-    user: null,
-    socket: null,
-    chatmessages: [],
-  }
-}
-*/
-
+// Clients
+var clientConnections = [];
 
 var app = express();
 
@@ -40,19 +36,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Attach chat object
+// Attach custom objects to request object
 app.use((req, res, next) => {
-  req.chat = {
-    user: null,
-    socket: null,
-    chatmessages: [],
-  };
+  req.attachments = {};
+  req.attachments.connections = clientConnections;
+  req.attachments.connection = new Connection();
   next();
 });
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/', [authenticateToken, connectToChat], indexRouter);
+app.use('/chat', [authenticateToken, connectToChat], chatRouter);
 app.use('/edit', authenticateToken, editRouter);
 app.use('/logout', authenticateToken, logoutRouter);
 

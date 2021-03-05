@@ -52,7 +52,8 @@
       <div id="chat-wrapper" class="col s12">
         <h1>
           <span>Chat</span>
-          <button id="refresh-chat" class="btn">Refresh</button>
+          <!--<button id="refresh-chat" class="btn">Refresh</button>-->
+          <a href="/" class="btn">Refresh</a>
         </h1>
         <div id="chat">
           <ul id="chat-messages">
@@ -62,7 +63,7 @@
           </ul>
           <div id="chat-input-wrapper" class="row">
             <form action="/chat/send" method="post">
-              <input data-emoji="true" type="text" name="chat-input" id="chat-input" class="col s10 m10 teal-text"
+              <input data-emoji="true" type="text" name="chat_input" id="chat-input" class="col s10 m10 teal-text"
                 autocomplete="off" v-model="textmessage" maxlength="500" @keyup="chatinputKeyUp" autofocus>
               <button id="send-button" value="Send" class="col s2 m1 btn white" type="submit">
                 <i class="material-icons teal-text">send</i>

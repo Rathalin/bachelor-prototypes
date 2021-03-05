@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { generateAccessToken, hash } = require('../middleware/authenticate');
 const userM = require('../models/userModel');
-const { connect, disconnect, sendMessage, MSG_TYPE } = require('../middleware/chat');
+const { connect, disconnect, sendMessage, MSG_TYPE } = require('../middleware/chatConnection');
 
 
 router.get('/', function (req, res, next) {
@@ -11,7 +11,6 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/', async function (req, res) {
-  console.log("Start of /login.js");
   // Check for missing attributes
   if (!req.body.username || !req.body.password) {
     return res.render('login',
@@ -39,7 +38,6 @@ router.post('/', async function (req, res) {
   // Generate token
   const token = generateAccessToken(user);
   res.cookie('authcookie', token, { expires: new Date(Date.now() + 1 * 3600000), httpOnly: true });
-  console.log("End of /login.js");
 
   res.redirect('/');
 });

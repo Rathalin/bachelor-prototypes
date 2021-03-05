@@ -15,13 +15,13 @@ const MSG_TYPE = Object.freeze({
  * @param {Object} req request object
  * @param {String} serverUrl 
  */
-function connect({ chat, user }, serverUrl) {
+function connect(connection, serverUrl) {
   const socket = io(serverUrl);
 
-  chat.socket = socket;
+  connection.socket = socket;
 
-  socket.messages = chat.chatmessages;
-  socket.user = user;
+  socket.messages = connection.chatmessages;
+  socket.user = connection.user;
 
   socket.on(MSG_TYPE.LOGIN, recieveLogin);
   socket.on(MSG_TYPE.LOGOUT, recieveLogout);
@@ -32,18 +32,13 @@ function connect({ chat, user }, serverUrl) {
 }
 
 
-function disconnect(chat) {
-
-}
-
-
-function sendMessage(chat) {
-
+function sendMessage(socket, { username, text }) {
+  socket.emit(MSG_TYPE.CHATMESSAGE, { username, text });
 }
 
 
 function recieveLogin(login) {
-  console.log(this.username, '/', this.user._id, ' recieved login');
+  console.log(this.user.username, '/', this.user._id, ' recieved login');
   this.messages.push({ text: `${login.username} joined the chat.` });
 
 }
@@ -54,29 +49,29 @@ function recieveLogout(logout) {
 }
 
 
-function recieveChatMessage() {
-
+function recieveChatMessage({ username, text }) {
+  this.messages.push({ text: `${username}: ${text}` });
 }
 
 
-function recieveServerMessage() {
-
+function recieveServerMessage({ text }) {
+  this.messages.push({ text: `${text}` });
 }
 
 
 
 function connectToChat(req, res, next) {
   // Test for connection to chat
-  const { user, chat } = req;
-  let { socket } = req.chat;
-  console.log(req.chat);
-  if (socket == null) {
+  const { connection, connections } = req.attachments;
+  const { user } = connection;
+
+  if (connection.socket == null) {
     // Connect to chat
     console.log(`Connecting ${user.username}:${user._id}`);
-    socket = connect(req, 'http://localhost:9123');
+    const socket = connect(connection, 'http://localhost:9123');
     socket.on('connect', () => {
       socket.emit(MSG_TYPE.LOGIN, { username: user.username });
-      socket.messages.push({ text: `${socket.username} joined the chat!` });
+      socket.messages.push({ text: `${user.username} joined the chat!` });
     });
   }
 
@@ -84,4 +79,4 @@ function connectToChat(req, res, next) {
 }
 
 
-module.exports = { connect, disconnect, sendMessage, MSG_TYPE, connectToChat };
+module.exports = { connect, sendMessage, MSG_TYPE, connectToChat };

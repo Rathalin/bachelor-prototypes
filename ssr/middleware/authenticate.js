@@ -20,8 +20,20 @@ async function authenticateToken(req, res, next) {
   try {
     const userId = await jwt.verify(token, process.env.AUTH_TOKEN_SECRET);
 
-    // Attach user to req object
-    req.user = await userM.findById(userId).exec();
+    let { connection, connections } = req.attachments;
+    // Attach user to connection object
+    connection.user = await userM.findById(userId).exec();
+    // Check if user already has a connection
+    let existingConnection = null;
+    if (connections.length > 0) {
+      existingConnection = connections.find(c => c.compareTo(connection));
+    }
+    if (existingConnection) {
+      req.attachments.connection = existingConnection;
+    } else {
+      connections.push(connection);
+    }
+
     next();
   } catch (err) {
     console.log(err);

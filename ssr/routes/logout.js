@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { MSG_TYPE } = require('../middleware/chat');
+const { MSG_TYPE } = require('../middleware/chatConnection');
 
 
 router.post('/', function (req, res) {
@@ -8,15 +8,19 @@ router.post('/', function (req, res) {
   res.clearCookie('authcookie');
 
   // Disconnect from chat
-  const { socket } = req.chat;
-  if (socket) {
-    socket.emit(MSG_TYPE.LOGOUT, {});
-    socket.disconnect();
-  console.log('disconnecting ', socket.user.username);
-    // Remove socket from the connections array
-    req.chat.socket = null;
-    req.chat.chatmessages = [];
+  const { connection, connections } = req.attachments;
+
+  if (connection.socket) {
+    req.attachments.connection.socket.emit(MSG_TYPE.LOGOUT, {});
+    req.attachments.connection.socket.disconnect();
+    console.log('disconnecting ', req.attachments.connection.socket.user.username);
+    // Clear connection
+    req.attachments.connection.socket = null;
+    req.attachments.connection.chatmessages = [];
   }
+
+  // Remove connection from the connections array
+  connections.splice(connections.indexOf(connection), 1);
 
   res.redirect('/login');
 });

@@ -17,7 +17,7 @@ The projects contains new javascript syntax so please use a NodeJS Version of 14
 1. Use `npm start` to start the NodeJS instance.
 
 
-### SSR project
+### SSR, CSR and HYBRID project
 
 1. Move into the directory `ssr`.
 1. Execute `npm i`.
