@@ -37,8 +37,8 @@
         </div>
         <div class="row">
           <div class="col s12 m4 l3">
-            <a href="/" class="btn">Back</a>
-            <button type="submit" class="btn">Save</button>
+            <a href="/" class="btn purple darken-4">Back</a>
+            <button type="submit" class="btn purple darken-4">Save</button>
           </div>
           {{# alert }}
           <div id="alert-msg" class="col s12 m4 l3">
@@ -47,7 +47,7 @@
           {{/ alert }}
           {{# success }}
           <div id="success-msg" class="col s12 m4 l3">
-            <div class="teal-text big-text">{{ success.text }}</div>
+            <div class="purple-text text-darken-4 big-text">{{ success.text }}</div>
           </div>
           {{/ success }}
         </div>
