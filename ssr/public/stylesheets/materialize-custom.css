@@ -1,0 +1,19 @@
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid #4a148c;
+    -webkit-box-shadow: 0 1px 0 0 #4a148c;
+    box-shadow: 0 1px 0 0 #4a148c;
+}
+
+input:not([type]):not([focus]):not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]) {
+    color: #4a148c !important;
+}
+
+#chat-input-group .row input:not([type]):focus:not([readonly]), #chat-input-group .row input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid white;
+    -webkit-box-shadow: 0 1px 0 0 white;
+    box-shadow: 0 1px 0 0 white;
+}
+
+input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
+    caret-color: #4a148c;
+}

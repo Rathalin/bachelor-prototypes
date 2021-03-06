@@ -39,23 +39,23 @@ function sendMessage(socket, { username, text }) {
 
 function recieveLogin(login) {
   console.log(this.user.username, '/', this.user._id, ' recieved login');
-  this.messages.push({ text: `${login.username} joined the chat.` });
+  this.messages.push({ text: `${login.username} joined the chat.`, systemmessage: true });
 
 }
 
 
 function recieveLogout(logout) {
-  this.messages.push({ text: `${logout.username} left the chat.` });
+  this.messages.push({ text: `${logout.username} left the chat.`, systemmessage: true });
 }
 
 
 function recieveChatMessage({ username, text }) {
-  this.messages.push({ text: `${username}: ${text}` });
+  this.messages.push({ username, text });
 }
 
 
 function recieveServerMessage({ text }) {
-  this.messages.push({ text: `${text}` });
+  this.messages.push({ text, systemmessage: true });
 }
 
 
@@ -71,7 +71,7 @@ function connectToChat(req, res, next) {
     const socket = connect(connection, 'http://localhost:9123');
     socket.on('connect', () => {
       socket.emit(MSG_TYPE.LOGIN, { username: user.username });
-      socket.messages.push({ text: `${user.username} joined the chat!` });
+      socket.messages.push({ text: `${user.username} joined the chat!`, systemmessage: true });
     });
   }
 
