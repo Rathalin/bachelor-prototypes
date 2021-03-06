@@ -21,7 +21,7 @@ router.post('/', async function (req, res) {
   const password = req.body.password;
 
   // Check if username already exists
-  if ((await userM.countDocuments({ username }).exec()) > 0) {
+  if ((await userM.countDocuments({ username: { $regex: username, $options: 'i' } }).exec()) > 0) {
     return res.render('register',
       { title: 'Registration failed', errors: [{ error: { text: 'This username is already taken.' }, },] }
     );
