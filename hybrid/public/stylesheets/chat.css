@@ -1,0 +1,12 @@
+#chat-messages {
+    min-height: 50vh;
+}
+
+
+#chat-input-wrapper {
+    border: 1px solid red;
+}
+
+#send-button {
+    min-width: 50px;
+}
