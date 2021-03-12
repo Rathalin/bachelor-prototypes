@@ -35,6 +35,7 @@ router.post('/', async function (req, res) {
     );
   }
 
+  console.log("YEEEEEEEEET", user);
   // Generate token
   const token = generateAccessToken(user);
   res.cookie('authcookie', token, { expires: new Date(Date.now() + 1 * 3600000), httpOnly: true });

@@ -38,7 +38,6 @@ function sendMessage(socket, { username, text }) {
 
 
 function recieveLogin(login) {
-  console.log(this.user.username, '/', this.user._id, ' recieved login');
   this.messages.push({ text: `${login.username} joined the chat.`, systemmessage: true });
 
 }
