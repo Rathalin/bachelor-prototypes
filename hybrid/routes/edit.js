@@ -4,8 +4,8 @@ const userM = require('../models/userModel');
 
 
 router.get('/', async function (req, res) {
-  // Load user
-  const user = await userM.findById(req.userId).exec();
+  // Load user  
+  const { user } = req;
   res.render('edit_profile', { title: 'Edit profile', user, });
 });
 
@@ -15,12 +15,14 @@ router.post('/', async function (req, res) {
   // TODO
   let { firstname, lastname, gender, dateOfBirth } = req.body;
 
+  let { user } = req;
+
   // Update user
   await userM.updateOne(
-    { _id: req.userId },
+    { _id: user._id },
     { firstname, lastname, gender, dateOfBirth }
   ).exec();
-  const user = await userM.findById(req.userId).exec();
+  user = await userM.findById(user._id).exec();
   console.log(user);
   res.render('edit_profile', { title: 'Saved Profile', user, success: { text: 'Profile saved.' } })
 });

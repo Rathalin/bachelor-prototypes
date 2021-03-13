@@ -25,7 +25,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <a href="/" class="btn">Your Profile</a>
+          <a href="/" class="btn purple darken-4">Your Profile</a>
         </div>
       </div>
     </div>

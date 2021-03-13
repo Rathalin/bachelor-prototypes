@@ -11,22 +11,11 @@ const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
 const registerRouter = require('./routes/register');
 
+// Connection
+const Connection = require('./models/Connection');
+
 // Authentication
 const { authenticateToken } = require('./middleware/authenticate');
-
-// Chat
-const { connectToChat } = require('./middleware/chat');
-
-/*
-req = {
-  chat: {
-    user: null,
-    socket: null,
-    chatmessages: [],
-  }
-}
-*/
-
 
 var app = express();
 
@@ -40,19 +29,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Attach chat object
-app.use((req, res, next) => {
-  req.chat = {
-    user: null,
-    socket: null,
-    chatmessages: [],
-  };
-  next();
-});
-
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/', [authenticateToken, connectToChat], indexRouter);
+app.use('/', authenticateToken, indexRouter);
 app.use('/edit', authenticateToken, editRouter);
 app.use('/logout', authenticateToken, logoutRouter);
 

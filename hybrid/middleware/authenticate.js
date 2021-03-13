@@ -20,8 +20,9 @@ async function authenticateToken(req, res, next) {
   try {
     const userId = await jwt.verify(token, process.env.AUTH_TOKEN_SECRET);
 
-    // Attach user to req object
+    // Attach user to connection object
     req.user = await userM.findById(userId).exec();
+
     next();
   } catch (err) {
     console.log(err);

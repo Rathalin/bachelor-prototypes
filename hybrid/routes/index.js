@@ -4,8 +4,8 @@ var router = express.Router();
 
 router.get('/', async function (req, res, next) {
   // Load user
-  const { user, socket, chatmessages } = req;
-  res.render('index', { title: user.username, user, messages: chatmessages });
+  const { user } = req;
+  res.render('index', { title: user.username, user });
 });
 
 

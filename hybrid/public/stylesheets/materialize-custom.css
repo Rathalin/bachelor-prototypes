@@ -1,0 +1,56 @@
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid #4a148c;
+    -webkit-box-shadow: 0 1px 0 0 #4a148c;
+    box-shadow: 0 1px 0 0 #4a148c;
+}
+
+input:not([type]):not([focus]):not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]) {
+    color: #4a148c !important;
+}
+
+#chat-input-group .row input:not([type]):focus:not([readonly]), #chat-input-group .row input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid white;
+    -webkit-box-shadow: 0 1px 0 0 white;
+    box-shadow: 0 1px 0 0 white;
+}
+
+input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
+    caret-color: #4a148c;
+}
+
+input[type=text]:not(.browser-default):not([readonly]):focus, input[type=password]:not(.browser-default):not([readonly]):focus {
+    border-bottom-color: #4a148c;
+    box-shadow: 0 1px 0 0 #4a148c;
+}
+
+input[type=text]:not(.browser-default):not([readonly]):focus+label, input[type=password]:not(.browser-default):not([readonly]):focus+label {
+    color: #4a148c;
+}
+
+.datepicker-date-display {
+    background-color: #4a148c;
+}
+
+.datepicker-table td.is-selected {
+    background-color: #4a148c;
+}
+
+.datepicker-cancel {
+    color: #4a148c
+}
+
+.datepicker-done {
+    color: #4a148c;
+}
+
+.dropdown-content li>span {
+    color: #4a148c;
+}
+
+.month-prev:focus, .month-next:focus {
+    background-color: #ea80fc;
+}
+
+.datepicker-day-button:focus {
+    background-color: #ea80fc;
+}
