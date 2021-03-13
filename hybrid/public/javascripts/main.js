@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set username
     const data_username = document.querySelector('#data-username').innerHTML;
     chatapp.username = data_username;
+    // Login
+    chatapp.loginBtnClick();
 
 
 });
