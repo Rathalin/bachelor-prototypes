@@ -240,6 +240,7 @@ function connect() {
             chatapp.connecting = false;
             console.error("Server connection error");
             chatapp.isJoined = false;
+            chatapp.username = "";
             chatapp.loginErrorText = "Server connection error";
         });
         // disconnect event
@@ -274,6 +275,7 @@ function sendChatMessage() {
 
 function logout() {
     chatapp.socket.emit(TYPE.LOGOUT, {});
+    chatapp.username = "";
     chatapp.isJoined = false;
     chatapp.loginErrorText = "";
     chatapp.messages = [];

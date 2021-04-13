@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.resizable {
+    resize: both;
+    overflow: auto;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+#profile {
+}
+
+.big-text {
+    padding-top: 5px;
+    font-size: large;
+    font-family: "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}

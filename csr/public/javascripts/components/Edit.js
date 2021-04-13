@@ -1,0 +1,66 @@
+export default {
+    data() {
+        return {
+            user: {
+                username: "",
+                firstname: "",
+                lastname: "",
+                gender: "",
+                dateOfBirth: "",
+            },
+            alert: {
+                text: "",
+            },
+            success: {
+                text: "",
+            }
+        };
+    },
+    template: `            
+        <header class="container">
+        <h1>Edit Profile</h1>
+        </header>
+        <main class="container">
+        <div class="row">
+            <form action="/edit" method="post">
+            <div class="row">
+                <div class="input-field col s12 m6 xl4">
+                <input id="firstname" name="firstname" type="text" value="{{ user.firstname }}" autocomplete="off">
+                <label for="firstname">Firstname</label>
+                </div>
+                <div class="input-field col s12 m6 xl4">
+                <input id="lastname" name="lastname" type="text" value="{{ user.lastname }}" autocomplete="off">
+                <label for="lastname">Lastname</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 xl4">
+                <input id="gender" name="gender" type="text" value="{{ user.gender }}" autocomplete="off">
+                <label for="gender">Gender</label>
+                </div>
+                <div class="input-field col s12 m6 xl4">
+                <input id="dateOfBirth" name="dateOfBirth" value="{{ user.dateOfBirth }}" type="text" class="datepicker">
+                <label for="dateOfBirth">Date of Birth</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m4 l3">
+                <a href="/" class="btn purple darken-4">Back</a>
+                <button type="submit" class="btn purple darken-4">Save</button>
+                </div>
+                {{# alert }}
+                <div id="alert-msg" class="col s12 m4 l3">
+                <p class="red-text big-text">{{ alert.text }}</p>
+                </div>
+                {{/ alert }}
+                {{# success }}
+                <div id="success-msg" class="col s12 m4 l3">
+                <div class="purple-text text-darken-4 big-text">{{ success.text }}</div>
+                </div>
+                {{/ success }}
+            </div>
+            </form>
+        </div>
+        </main>
+    `,
+};
