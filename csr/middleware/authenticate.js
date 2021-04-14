@@ -15,7 +15,7 @@ async function authenticateToken(req, res, next) {
   // Gather the jwt access token from the request header
   const token = req.cookies?.authcookie;
   // Check if there is no token
-  if (!token) { return res.redirect('/login'); }
+  if (!token) { return res.status(401); }
 
   try {
     const userId = await jwt.verify(token, process.env.AUTH_TOKEN_SECRET);
@@ -26,7 +26,7 @@ async function authenticateToken(req, res, next) {
     next();
   } catch (err) {
     console.log(err);
-    return res.redirect('/login');
+    return res.status(500);
   }
 }
 

@@ -1,19 +1,14 @@
 var express = require('express');
 var router = express.Router();
-const { generateAccessToken, hash } = require('../middleware/authenticate');
-const userM = require('../models/userModel');
-
-
-router.get('/', function (req, res) {
-  res.render('register', { title: 'Register', });
-});
+const { generateAccessToken, hash } = require('../../middleware/authenticate');
+const userM = require('../../models/userModel');
 
 
 router.post('/', async function (req, res) {
   // Check form parameters
   if (!req.body.username || !req.body.password) {
-    return res.render('register',
-      { title: 'Registration failed', errors: [{ error: { text: 'Please put in username and password.' }, },] }
+    return res.json(
+      { errors: [{ text: 'Please put in username and password.' },] }
     );
   }
 
@@ -22,8 +17,8 @@ router.post('/', async function (req, res) {
 
   // Check if username already exists
   if ((await userM.countDocuments({ username: { $regex: username, $options: 'i' } }).exec()) > 0) {
-    return res.render('register',
-      { title: 'Registration failed', errors: [{ error: { text: 'This username is already taken.' }, },] }
+    return res.json(
+      { errors: [{ text: 'This username is already taken.' },] }
     );
   }
   // Insert new user into db
@@ -33,7 +28,7 @@ router.post('/', async function (req, res) {
   const token = generateAccessToken(user);
   res.cookie('authcookie', token, { expires: new Date(Date.now() + 1 * 3600000), httpOnly: true });
   // Redirect to registered
-  res.render('registered', { title: 'Registered' });
+  res.json({ user, success: { text: 'Registration successful!' } });
 });
 
 module.exports = router;

@@ -3,7 +3,6 @@ import component_home from './components/Home.js';
 import component_edit from './components/Edit.js';
 import component_login from './components/Login.js';
 import component_register from './components/Register.js';
-import component_registered from './components/Registered.js';
 import api from './api.js';
 
 
@@ -34,11 +33,6 @@ const routes = [
         component: component_register,
     },
     {
-        path: '/registered',
-        name: 'registered',
-        component: component_registered,
-    },
-    {
         path: '/login',
         name: 'login',
         component: component_login,
@@ -52,18 +46,20 @@ const routes = [
     },
 ];
 
-const router = new VueRouter({ 
+const router = new VueRouter({
     routes,
     mode: 'history',
 });
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!api.validateToken()) {
+        if (!api.isLoggedIn()) {
             next({ name: 'login' });
         } else {
             next();
         }
+    } else if (api.isLoggedIn()) {
+        next({ name: 'home' });
     } else {
         next();
     }
@@ -71,7 +67,7 @@ router.beforeEach((to, from, next) => {
 
 const routingapp = new Vue({
     router,
-    mounted() {
+    async mounted() {
         M.AutoInit();
 
         M.Datepicker.init(document.querySelectorAll('.datepicker'), {
@@ -81,6 +77,10 @@ const routingapp = new Vue({
             minDate: new Date(1900, 1, 1),
             maxDate: new Date(),
         });
+
+        if (await api.loginWithCookie()) {
+            this.$router.push('/home');
+        }
     },
 }).$mount('#app');
 

@@ -1,5 +1,6 @@
 import api from '../api.js';
 import store from '../store.js';
+import ChatComponent from './Chat.js';
 
 
 export default {
@@ -13,9 +14,14 @@ export default {
 
     methods: {
         async logout() {
+            this.$refs.chatComponent.logout();
             await api.logout();
             this.$router.push('/login');
-        },        
+        },
+    },
+
+    components: {
+        'chat': ChatComponent,
     },
 
     template: `
@@ -52,7 +58,8 @@ export default {
                         <div class="col s12">{{ user.dateOfBirth }}</div>
                     </div>
                 </div>
-            </div>          
+            </div>   
+            <chat v-bind:username="user.username" ref="chatComponent"></chat>       
         </main>
     `,
 };

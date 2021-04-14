@@ -10,8 +10,9 @@ dotenv.config();
 // Connection
 const Connection = require('./models/Connection');
 
-// Authentication
-const { authenticateToken } = require('./middleware/authenticate');
+
+// API Routes
+const apiRouter = require('./routes/api/api');
 
 var app = express();
 
@@ -24,6 +25,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/api', apiRouter);
+
+
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
 
 
 // catch 404 and forward to error handler
