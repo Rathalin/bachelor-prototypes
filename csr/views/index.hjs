@@ -15,6 +15,12 @@
   <script src="/javascripts/lib/vue-router.js"></script>
   <script type="module" src="/javascripts/main.js"></script>
 
+  <meta itemprop="WEB_IP" content="{{ WEB_IP }}">
+  <meta itemprop="WEB_PORT" content="{{ WEB_PORT }}">
+  <meta itemprop="API_IP" content="{{ API_IP }}">
+  <meta itemprop="API_PORT" content="{{ API_PORT }}">
+  <meta itemprop="CHAT_IP" content="{{ CHAT_PORT }}">
+  <meta itemprop="Chat_PORT" content="{{ CHAT_PORT }}">
 </head>
 
 <body>

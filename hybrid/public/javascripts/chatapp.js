@@ -16,14 +16,6 @@ const TYPE = Object.freeze({
     SERVERMESSAGE: 4,
 });
 
-//const SERVER_URL = "http://localhost:9992";
-const SERVER_PROTOCOL = "http://";
-const SERVER_IP = "10.0.0.1";
-//const SERVER_IP = "localhost";
-const SERVER_PORT = "9123";
-const SERVER_URL = `${SERVER_PROTOCOL}${SERVER_IP}:${SERVER_PORT}`
-const SERVER_SOCKET_IO_URL = `${SERVER_URL}/socket.io/socket.io.js`;
-
 const chatapp = new Vue({
     el: "#chat-app",
 
@@ -169,6 +161,14 @@ const chatapp = new Vue({
 
     },
 
+    beforeCreate() {
+        this.PROTOCOL = "http://";
+        this.IP = "localhost";
+        this.PORT = "9123";
+        this.CHAT_URL = `${this.PROTOCOL}${this.IP}:${this.PORT}`
+        this.CHAT_SOCKET_IO_URL = `${this.CHAT_URL}/socket.io/socket.io.js`;
+    },
+
 
     mounted: function () {
         M.AutoInit();
@@ -217,7 +217,7 @@ function connect() {
     chatapp.connecting = true;
     // check if server script is available
     let socketIoScript = document.createElement("script");
-    socketIoScript.src = SERVER_SOCKET_IO_URL;
+    socketIoScript.src = chatapp.CHAT_SOCKET_IO_URL;
     document.head.append(socketIoScript);
     // onerror event
     socketIoScript.onerror = function (event) {
@@ -229,7 +229,7 @@ function connect() {
     socketIoScript.onload = function () {
         chatapp.connecting = false;
         // create socket
-        chatapp.socket = io.connect(SERVER_URL);
+        chatapp.socket = io.connect(chatapp.CHAT_URL);
         // socket connect event
         chatapp.socket.on("connect", function () {
             chatapp.connecting = false;

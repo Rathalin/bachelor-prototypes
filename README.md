@@ -25,3 +25,4 @@ The projects contains new javascript syntax so please use a NodeJS Version of 14
 1. Put the string `AUTH_TOKEN_SECRET=` into the `.env` file.
 1. Call the NodeJS console by typing `node`, generate a secret token using `require('crypto').randomBytes(64).toString('hex')` and copy the value with both `'` into the `.env` file. The content should look something like this: `AUTH_TOKEN_SECRET='16b6e711238d7fa0ae9e9eb28c6297d18eeffa17340fa27b684fd05adae900081cf7b1ef70ca8556fcd4065bd6fb774de3ec023df6c33ad9ffdb6a66c8636c6f'`
 1. Use `npm start` to start the NodeJS instance.
+1. Don't forget to start the chat server!

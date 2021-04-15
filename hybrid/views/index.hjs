@@ -12,6 +12,10 @@
   <script src="/javascripts/vue.min.js"></script>
   <script type="module" src="/javascripts/main.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+
+  <meta itemprop="CHAT_IP" content="{{ CHAT_PORT }}">
+  <meta itemprop="Chat_PORT" content="{{ CHAT_PORT }}">
 
 </head>
 

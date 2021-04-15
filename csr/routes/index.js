@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const config = require('../config/serverConnections');
 
-
-router.get('/', async function (req, res) {
-  res.sendFile('index.html');
+router.get('/', function (req, res) {
+  res.render('index', {
+    config,
+  });
 });
 
 

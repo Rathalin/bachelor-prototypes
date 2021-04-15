@@ -4,8 +4,11 @@ const { generateAccessToken, hash } = require('../middleware/authenticate');
 const userM = require('../models/userModel');
 
 
+
 router.get('/', function (req, res, next) {
-  res.render('login', { title: 'Login' });
+  res.render('login', {
+    title: 'Hybrid - Login',
+  });
 });
 
 

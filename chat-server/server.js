@@ -7,11 +7,14 @@
 // IMPORTS ------------------------------------------------------------------------------------------------------------
 
 const io = require("socket.io");
-const config = require("./chatserver-config");
 // load command line arguments
 const argv = require("./modules/yargs");
 // create logger with loglevel (trace, debug, info, warn or error)
 const log = require("./modules/logger")(argv.loglevel);
+
+const dotenv = require('dotenv');
+dotenv.config();
+const config = require('./config/serverConnections');
 
 
 // CONSTANTS ----------------------------------------------------------------------------------------------------------
@@ -67,8 +70,8 @@ function recieveChatMessage(chatMsg) {
 // MAIN --------------------------------------------------------------------------------------------------------------
 
 (function main() {
-    const ioserver = io.listen(config.SERVER_PORT);
-    log.info(`[Start] ${config.SERVER_NAME} listening on port ${config.SERVER_PORT}`);
+    const ioserver = io.listen(config.CHAT_PORT);
+    log.info(`[Start] ${config.SERVER_NAME} listening on port ${config.CHAT_PORT}`);
 
     ioserver.sockets.on("connection", function (socket) {
         // add socket to clients array  
@@ -80,13 +83,6 @@ function recieveChatMessage(chatMsg) {
         socket.emit(TYPE.SERVERMESSAGE, { 
             text: `Welcome to ${config.SERVER_NAME}!`,
         });
-
-        /*
-        // send server mobile info message
-        socket.emit(TYPE.SERVERMESSAGE, { 
-            text: `Now also optimized for mobile devices. You can test it on "http://${config.WEBSERVER_IP_WAN}:${config.WEBSERVER_PORT_WAN}/"`,
-        });
-        */
         
         
         log.info(`[Servermessage] Greeting message.`);
