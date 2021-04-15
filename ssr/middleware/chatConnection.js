@@ -67,7 +67,7 @@ function connectToChat(req, res, next) {
   if (connection.socket == null) {
     // Connect to chat
     console.log(`Connecting ${user.username}:${user._id}`);
-    const socket = connect(connection, 'http://localhost:9123');
+    const socket = connect(connection, `http://${process.env.CHAT_IP ?? 'localhost'}:${process.env.CHAT_PORT ?? 9123}`);
     socket.on('connect', () => {
       socket.emit(MSG_TYPE.LOGIN, { username: user.username });
       socket.messages.push({ text: `${user.username} joined the chat!`, systemmessage: true });

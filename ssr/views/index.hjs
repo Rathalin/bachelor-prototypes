@@ -8,7 +8,6 @@
   <script src="/javascripts/materialize.min.js"></script>
   <script src="/javascripts/materialize_init.js"></script>
   <script src="/javascripts/chat.js"></script>
-  <script src="http://localhost:9123/socket.io/socket.io.js"></script>
 </head>
 
 <body>

@@ -161,14 +161,6 @@ const chatapp = new Vue({
 
     },
 
-    beforeCreate() {
-        this.PROTOCOL = "http://";
-        this.IP = "localhost";
-        this.PORT = "9123";
-        this.CHAT_URL = `${this.PROTOCOL}${this.IP}:${this.PORT}`
-        this.CHAT_SOCKET_IO_URL = `${this.CHAT_URL}/socket.io/socket.io.js`;
-    },
-
 
     mounted: function () {
         M.AutoInit();
@@ -217,7 +209,7 @@ function connect() {
     chatapp.connecting = true;
     // check if server script is available
     let socketIoScript = document.createElement("script");
-    socketIoScript.src = chatapp.CHAT_SOCKET_IO_URL;
+    socketIoScript.src = `${chatapp.CHAT_URL}/socket.io/socket.io.js`;
     document.head.append(socketIoScript);
     // onerror event
     socketIoScript.onerror = function (event) {

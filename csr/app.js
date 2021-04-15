@@ -10,6 +10,7 @@ dotenv.config();
 // Connection
 const Connection = require('./models/Connection');
 
+const indexRouter = require('./routes/index');
 
 // API Routes
 const apiRouter = require('./routes/api/api');
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
 app.use('/api', apiRouter);
 
 

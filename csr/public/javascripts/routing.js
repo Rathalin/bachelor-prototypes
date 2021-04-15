@@ -4,6 +4,7 @@ import component_edit from './components/Edit.js';
 import component_login from './components/Login.js';
 import component_register from './components/Register.js';
 import api from './api.js';
+import store from './store.js';
 
 
 const routes = [
@@ -67,6 +68,20 @@ router.beforeEach((to, from, next) => {
 
 const routingapp = new Vue({
     router,
+
+    methods: {
+        loadItemprops() {
+            // Load connection data from meta elements
+            let itempropElements = document.querySelectorAll('meta[itemprop]');
+            for (let itemprop of itempropElements) {
+                let itempropName = itemprop.getAttribute('itemprop');
+                let itempropContent = itemprop.getAttribute('content');
+                console.log(`${itempropName}: ${itempropContent}`);
+                store[itempropName] = itempropContent;
+            }
+        },
+    },
+
     async mounted() {
         M.AutoInit();
 
@@ -78,10 +93,14 @@ const routingapp = new Vue({
             maxDate: new Date(),
         });
 
+        this.loadItemprops();
+
         if (await api.loginWithCookie()) {
             this.$router.push('/home');
         }
     },
+
+
 }).$mount('#app');
 
 

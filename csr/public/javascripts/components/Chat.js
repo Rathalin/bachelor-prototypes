@@ -1,6 +1,8 @@
 /**
  * @author Daniel Flockert
  */
+import store from '../store.js';
+
 export default {
     props: {
         username: String,
@@ -151,7 +153,7 @@ export default {
             this.connecting = true;
             // check if server script is available
             let socketIoScript = document.createElement("script");
-            socketIoScript.src = this.SERVER_SOCKET_IO_URL;
+            socketIoScript.src = `${store.CHAT_URL}/socket.io/socket.io.js`;
             document.head.append(socketIoScript);
             // onerror event
             socketIoScript.onerror = (event) => {
@@ -163,7 +165,7 @@ export default {
             socketIoScript.onload = () => {
                 this.connecting = false;
                 // create socket
-                this.socket = io.connect(this.SERVER_URL);
+                this.socket = io.connect(store.CHAT_URL);
                 // socket connect event
                 this.socket.on("connect", () => {
                     this.connecting = false;
@@ -252,13 +254,6 @@ export default {
             CHATMESSAGE: 3,
             SERVERMESSAGE: 4,
         });
-        //const SERVER_URL = "http://localhost:9992";
-        this.SERVER_PROTOCOL = "http://";
-        this.SERVER_IP = "localhost";
-        //const SERVER_IP = "localhost";
-        this.SERVER_PORT = "9123";
-        this.SERVER_URL = `${this.SERVER_PROTOCOL}${this.SERVER_IP}:${this.SERVER_PORT}`
-        this.SERVER_SOCKET_IO_URL = `${this.SERVER_URL}/socket.io/socket.io.js`;
     },
 
     mounted() {

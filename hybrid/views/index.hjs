@@ -11,12 +11,11 @@
   <script src="/javascripts/materialize.min.js"></script>
   <script src="/javascripts/vue.min.js"></script>
   <script type="module" src="/javascripts/main.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
-
-  <meta itemprop="CHAT_IP" content="{{ CHAT_PORT }}">
-  <meta itemprop="Chat_PORT" content="{{ CHAT_PORT }}">
-
+  
+  {{# itemprops }}
+  <meta itemprop="{{ itemprop }}" content="{{ content }}">
+  {{/ itemprops}}
 </head>
 
 <body>
@@ -30,7 +29,6 @@
         </div>
         <div class="row">
           <h1>
-            <span id="data-username" class="col s12 m6">{{ user.username }}</span>
             <div class="col s12 m3">
               <a href="/edit" class="btn purple darken-4">Edit Profile</a>
             </div>
@@ -55,10 +53,8 @@
         </div>
       </div>
     </div>
-
-    <div style="display: none;">
-      {{=<% %>=}}
-    </div>
+    
+    {{=<% %>=}}
     <div id="chat-app" class="row">
 
       <div id="app-body">
@@ -123,9 +119,7 @@
         </div>
       </div>
     </div>
-    <div style="display: none;">
-      <%={{ }}=%>
-    </div>
+    <%={{ }}=%>
   </main>
 </body>
 

@@ -4,7 +4,7 @@ import store from './store.js';
 export default {
     async login(data) {
         try {
-            let res = await this.post(store.baseUrl + '/login', data);
+            let res = await this.post(`${store.API_URL}/login`, data);
             return await res.json();
         }
         catch (ex) {
@@ -14,13 +14,13 @@ export default {
     },
 
     async logout() {
-        if ((await this.post(store.baseUrl + '/logout')).status === 200) {
+        if ((await this.post(`${store.API_URL}/logout`)).status === 200) {
             store.user = null;
         }
     },
 
     async loginWithCookie() {
-        let res = await this.post(store.baseUrl + '/login/cookie', {});
+        let res = await this.post(`${store.API_URL}/login/cookie`, {});
         let { authorized, user } = await res.json();
         console.log("Authorized: " + authorized + ", User: " + JSON.stringify(user));
         if (authorized) {
@@ -30,7 +30,7 @@ export default {
     },
 
     async register(registerData) {
-        let res = await this.post(store.baseUrl + '/register', registerData);
+        let res = await this.post(`${store.API_URL}/register`, registerData);
         let resData = await res.json();
         if (resData.user) {
             store.user = resData.user;
@@ -44,7 +44,7 @@ export default {
 
 
     async update(newUserData) {
-        let res = await this.post(store.baseUrl + '/edit', { user: newUserData });
+        let res = await this.post(`${store.API_URL}/edit`, { user: newUserData });
         let resData = await res.json();
         if (resData.user) {
             store.user = resData.user;

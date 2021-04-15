@@ -6,15 +6,8 @@ import { routingapp } from './routing.js';
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    // Vue JS setup
+document.addEventListener('DOMContentLoaded', () => {  
 
     let app = new Vue(routingapp);
-
-    // Set username
-    // const data_username = document.querySelector('#data-username').innerHTML;
-    // chatapp.username = data_username;
-
 
 });

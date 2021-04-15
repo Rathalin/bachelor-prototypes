@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const config = require('../config/serverConnections');
+const itemprops = require('../config/itemprops');
+
 
 router.get('/', function (req, res) {
   res.render('index', {
-    config,
+    itemprops,
   });
 });
 
 
 module.exports = router;
-
