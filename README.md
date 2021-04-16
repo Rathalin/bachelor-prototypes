@@ -93,11 +93,12 @@ CHAT_PORT=9000
 
 The rendering projects only work with the AUTH_TOKEN_SECRET specified in the .env files. Although any value can be used it is recommended to generate a random token:
 
-1. Call the NodeJS console by typing `node`, generate a secret token using `require('crypto').randomBytes(64).toString('hex')` 
+1. Call the NodeJS console by typing `node`
+1. Generate a secret token using `require('crypto').randomBytes(64).toString('hex')` 
 1. Copy the value into the `.env` file.
 
 
-### Starting a project
+## Starting a project
 
 1. Move into the respective project directory.
 1. Execute `npm i`.
